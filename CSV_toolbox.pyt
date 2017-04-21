@@ -5,18 +5,18 @@ class Toolbox(object):
     def __init__(self):
         """Define the toolbox (the name of the toolbox is the name of the
         .pyt file)."""
-        self.label = "Toolbox"
-        self.alias = ""
+        self.label = "CSV Toolbox"
+        self.alias = "CSV Toolbox"
 
         # List of tool classes associated with this toolbox
-        self.tools = [Tool]
+        self.tools = [AppendCSVtoFC]
 
 
-class Tool(object):
+class AppendCSVtoFC(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
-        self.label = "Tool"
-        self.description = ""
+        self.label = "Append CSV to FeatureClass"
+        self.description = "Appends the Data in the CSV File to Selected featureClass"
         self.canRunInBackground = False
 
     def getParameterInfo(self):
