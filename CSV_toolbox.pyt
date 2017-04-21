@@ -46,4 +46,20 @@ class AppendCSVtoFC(object):
 
     def execute(self, parameters, messages):
         """The source code of the tool."""
+        import csv
+        input_csv_path=parameters[0].valueAsText
+        fc_path=parameters[1].valueAsText
+        #open a Search Cursor on this featureClass
+        cursor=arcpy.da.InsertCursor(fc_path, ['Name', 'SHAPE@Y', 'SHAPE@X'])
+        
+        with open(input_csv_path, 'rb') as csv_file:
+            reader=csv.reader(csv_file)
+            for row in reader:
+                messages.addMessage(row[2])
+                input=(row[2], row[0],row[1])
+                #Insert into Cursor
+                cursor.insertRow(input)
+        del cursor
+        messages.addMessage("Finished")
+        
         return
