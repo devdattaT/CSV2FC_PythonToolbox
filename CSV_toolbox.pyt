@@ -95,6 +95,18 @@ class Append_AnyCSVtoFC(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
+        #read the First Row in the CSV file
+        with open(parameters[0].valueAsText, 'rb') as f:
+            first_line = f.readline()
+            #split the line
+            split=first_line.split(',')
+            #Add in the dropDown for XField
+            parameters[1].filter.list =split
+            #Add in the dropDown for Y Field
+            parameters[2].filter.list =split
+            #Add in the dropDown for Name Field
+            parameters[3].filter.list =split
+                
         return
 
     def updateMessages(self, parameters):
