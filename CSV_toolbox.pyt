@@ -21,7 +21,12 @@ class AppendCSVtoFC(object):
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-        params = None
+        param0 = arcpy.Parameter("in_csv","Input CSV","Input","DEFile","Required")
+        param0.filter.list = ['csv']
+        
+        param1 = arcpy.Parameter("Featureclass","Featureclass","Input", "DEFeatureClass","Required")
+        
+        params = [param0, param1]
         return params
 
     def isLicensed(self):
