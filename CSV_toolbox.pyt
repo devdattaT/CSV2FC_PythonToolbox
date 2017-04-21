@@ -76,9 +76,15 @@ class Append_AnyCSVtoFC(object):
         param0 = arcpy.Parameter("in_csv","Input CSV","Input","DEFile","Required")
         param0.filter.list = ['csv']
         
-        param1 = arcpy.Parameter("Featureclass","Featureclass","Input", "DEFeatureClass","Required")
+        param1 = arcpy.Parameter("XField","X Field","Input","GPString","Required")
         
-        params = [param0, param1]
+        param2 = arcpy.Parameter("YField","Y Field","Input","GPString","Required")
+        
+        param3 = arcpy.Parameter("Name_Field","Name Field","Input","GPString","Required")
+        
+        param4 = arcpy.Parameter("Featureclass","Featureclass","Input", "DEFeatureClass","Required")
+        
+        params = [param0, param1, param2, param3, param4]
         return params
 
     def isLicensed(self):
