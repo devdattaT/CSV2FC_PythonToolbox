@@ -118,18 +118,26 @@ class Append_AnyCSVtoFC(object):
         """The source code of the tool."""
         import csv
         input_csv_path=parameters[0].valueAsText
-        fc_path=parameters[1].valueAsText
+        fc_path=parameters[4].valueAsText
         #open a Search Cursor on this featureClass
-        cursor=arcpy.da.InsertCursor(fc_path, ['Name', 'SHAPE@Y', 'SHAPE@X'])
+        cursor=arcpy.da.InsertCursor(fc_path, ['Name', 'SHAPE@X', 'SHAPE@Y'])
         
         with open(input_csv_path, 'rb') as csv_file:
             reader=csv.reader(csv_file)
+            #set the indices from the headers
+            split=reader.next()
+            #set the Indices
+            xIndex=split.index(parameters[1].valueAsText)
+            yIndex=split.index(parameters[2].valueAsText)
+            nameIndex=split.index(parameters[3].valueAsText)
+            
             for row in reader:
-                messages.addMessage(row[2])
-                input=(row[2], row[0],row[1])
+                messages.addMessage(row[nameIndex])
+                input=(row[nameIndex], row[xIndex],row[yIndex])
                 #Insert into Cursor
                 cursor.insertRow(input)
         del cursor
+        
         messages.addMessage("Finished")
         
         return
